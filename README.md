@@ -1,3 +1,4 @@
+**本实验为大二下操作系统课程要求实现mit xv6的相关实验**
 xv6源代码，供学习交流
 xv6 is a re-implementation of Dennis Ritchie's and Ken Thompson's Unix
 Version 6 (v6).  xv6 loosely follows the structure and style of v6,
@@ -48,3 +49,6 @@ You will need a RISC-V "newlib" tool chain from
 https://github.com/riscv/riscv-gnu-toolchain, and qemu compiled for
 riscv64-softmmu.  Once they are installed, and in your shell
 search path, you can run "make qemu".
+
+## 联系
+2195821921@qq.com
