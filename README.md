@@ -1,4 +1,4 @@
-**Lab 1**
+## Lab 1
 
 环境：
 Ubuntu22.04
@@ -34,3 +34,25 @@ _Makefile文件line 135加上:
 ![image](https://github.com/JaeHua/whu-xv6-lab-2020/assets/126366914/ab5ddd56-d911-4faa-9066-ddc281c5571c)
 
 加了printf("read de = %s\n",de.name);用来理解
+
+### xargs
+
+**step1 get standard input**
+![image](https://github.com/JaeHua/whu-xv6-lab-2020/assets/126366914/82aa08ec-c7ea-4b47-809c-91412c76a2ef)
+
+**step2. get command-line parameter**
+```
+    for (int i = 1; i < argc; i++)
+    {
+        xargvs[xarg] = argv[i];
+        printf("xargvs[%d] = %s\n",xarg,xargvs[xarg]);
+        xarg++;
+    }
+```
+
+**step3 exec && fork**
+● 记得sleep确保管道|前全部输出完成
+
+![image](https://github.com/JaeHua/whu-xv6-lab-2020/assets/126366914/3820e729-f6b9-413b-8aab-031f2cc44685)
+
+
