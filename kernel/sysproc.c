@@ -5,6 +5,10 @@
 #include "memlayout.h"
 #include "spinlock.h"
 #include "proc.h"
+#include "sysinfo.h"
+
+uint64 acquire_freemem();
+uint64 acquire_nproc();
 
 uint64
 sys_exit(void)
@@ -88,4 +92,33 @@ sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+
+uint64
+sys_trace(void)
+{
+  int mask;
+  argint(0,&mask);
+  if( mask < 0)
+    return -1;
+  struct proc *p = myproc();
+  p->trace_mask = mask;
+  return 0;
+}
+
+uint64
+sys_sysinfo(void)
+{
+  struct sysinfo info;
+  uint64 addr;// user pointer to struct stat
+  struct proc *p = myproc();
+  argaddr(0 , &addr);//接受第0个参数，用户空间获取第0个参数(即缓冲区地址)
+  if(addr < 0)
+    return -1;
+  info.nproc = acquire_nproc();
+  info.freemem = acquire_freemem();
+  //把info信息拷到addr处
+  if(copyout(p->pagetable, addr, (char *)&info, sizeof(info)) < 0)
+    return -1;
+  return 0;
 }
